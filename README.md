@@ -44,9 +44,9 @@ this will return
 ```
 HTTP/1.1 200 
 Set-Cookie: JSESSIONID=896F4764AE6AA6E3BF6B2DB2FA1C17DB; Max-Age=60; Expires=Sun, 29-Mar-2020 11:55:54 GMT; Path=/; HttpOnly
-Content-Type: text/plain;charset=UTF-8## Docker Deployment
+Content-Type: text/plain;charset=UTF-8
 Content-Length: 0
-Date: Sun, 29 Mar 2020 11:54:54 GMT## AWS Deployment
+Date: Sun, 29 Mar 2020 11:54:54 GMT
 ```
 
 Noticed the JSESSIONID, we need to use it for subsequent curl call
