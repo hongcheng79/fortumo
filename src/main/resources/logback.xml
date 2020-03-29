@@ -10,4 +10,8 @@
     <root level="ERROR">
         <appender-ref ref="STDOUT" />
     </root>
+
+    <logger name="chc.fortumo.controller" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
 </configuration>

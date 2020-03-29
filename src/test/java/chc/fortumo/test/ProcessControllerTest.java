@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -32,7 +33,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class ProcessControllerTest {
-    private String path = "fortumo/process/compute";
+    private String path = "process/compute";
     private BasicCookieStore cookieStore;
     private HttpClient client;
     private HttpPost httpPost;
@@ -42,15 +43,6 @@ public class ProcessControllerTest {
 
     @BeforeAll
     public void init() {
-        // Init the required http client with fixed JSESIONID
-        cookieStore = new BasicCookieStore();
-        BasicClientCookie cookie = new BasicClientCookie("JSESSIONID", "1234");
-        cookie.setDomain("localhost");
-        cookie.setPath("/"+path);
-        cookieStore.addCookie(cookie);
-
-        client = HttpClientBuilder.create().setDefaultCookieStore(cookieStore).build();
-
         httpPost = new HttpPost("http://localhost:" + this.port + "/" + path);
     }
 
@@ -62,6 +54,8 @@ public class ProcessControllerTest {
 
     @Test
     public void test0_Empty() throws Exception {
+        generateSessionId();
+
         HttpResponse response = client.execute(httpPost);
         String result = EntityUtils.toString(response.getEntity());
         assertThat(result).isEqualTo("0");
@@ -69,6 +63,8 @@ public class ProcessControllerTest {
 
     @Test
     public void test1_InvalidNumber() throws Exception {
+        generateSessionId();
+
         List<NameValuePair> urlParameters = new ArrayList<>();
 
         // number = aa
@@ -107,6 +103,8 @@ public class ProcessControllerTest {
 
     @Test
     public void test2_SimpleHappyPath() throws Exception {
+        generateSessionId();
+
         List<NameValuePair> urlParameters = new ArrayList<>();
 
         // number = 1
@@ -151,6 +149,8 @@ public class ProcessControllerTest {
 
     @Test
     public void test3_MultiThreadedHappyPath() throws Exception {
+        generateSessionId();
+
         List<NameValuePair> urlParameters = new ArrayList<>();
         urlParameters.add(new BasicNameValuePair("number", "10"));
 
@@ -181,5 +181,18 @@ public class ProcessControllerTest {
         assertThat(result).isEqualTo("1000");
 
         executorService.shutdown();
+    }
+
+    private void generateSessionId() {
+        UUID uuid = UUID.randomUUID();
+        String randomUUIDString = uuid.toString();
+
+        cookieStore = new BasicCookieStore();
+        BasicClientCookie cookie = new BasicClientCookie("JSESSIONID", randomUUIDString);
+        cookie.setDomain("localhost");
+        cookie.setPath("/"+path);
+        cookieStore.addCookie(cookie);
+
+        client = HttpClientBuilder.create().setDefaultCookieStore(cookieStore).build();
     }
 }

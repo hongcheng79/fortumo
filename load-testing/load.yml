@@ -1,0 +1,18 @@
+config:
+  target: "http://localhost:9090"
+  phases:
+    - duration: 10
+      arrivalRate: 1
+      rampTo: 5
+  variables:
+    test:
+      - ["1", "2", "3", "4", "5", "end"]
+scenarios:
+  - name: "Compute"
+    flow:
+      - loop:
+          - post:
+              url: "/process/compute"
+              form:
+                number: "{{ $loopElement }}"
+        over: test

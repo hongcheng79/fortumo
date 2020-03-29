@@ -1,0 +1,18 @@
+config:
+  target: "https://fortumo.chclab.net"
+  phases:
+    - duration: 300
+      arrivalRate: 100
+      rampTo: 150
+  variables:
+    test:
+      - ["1", "2", "3", "4", "5", "end"]
+scenarios:
+  - name: "Compute"
+    flow:
+      - loop:
+          - post:
+              url: "/process/compute"
+              form:
+                number: "{{ $loopElement }}"
+        over: test
