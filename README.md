@@ -82,11 +82,11 @@ Once we do a docker build `docker-compose build --build-arg APP_VERSION="0.0.1" 
 
 `docker tag fortumo_app:latest 413535710414.dkr.ecr.ap-northeast-1.amazonaws.com/chclab:fortumo_app`
 
-Finally we push it
+Then we push it
 
 `docker push 413535710414.dkr.ecr.ap-northeast-1.amazonaws.com/chclab:fortumo_app`
 
-Before we can use it in Beanstalk with "Multi-container Docker" configuration
+Finally we can use it in Beanstalk with "Multi-container Docker" configuration
 <p align="center">
   <img src="https://github.com/hongcheng79/fortumo/blob/master/AWS-Beanstalk-Config.png" width="500">
 </p>
