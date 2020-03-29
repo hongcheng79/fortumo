@@ -33,7 +33,7 @@ This version param is important to build docker deployment later
 ## Unit Testing
 `chc.fortumo.test.ApplicationContentLoadingTest` is to test Spring context loading.
 
-`chc.fortumo.test.ProcessControllerTest` is the main testing class for chc.fortumo.controller.ProcessController
+`chc.fortumo.test.ProcessControllerTest` is the main testing class for `ProcessController`
 Instead of testing the controller directly, it use Apache Http Client to test the application which cover single and multi-thread environment. Each test cases will have a new session. 
 `src/test/resources/application.properties` contain set of parameters that could be use during Unit Testing
 
