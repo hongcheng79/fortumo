@@ -183,6 +183,9 @@ public class ProcessControllerTest {
         executorService.shutdown();
     }
 
+    /**
+     * Utility to generate session id by UUID
+     */
     private void generateSessionId() {
         UUID uuid = UUID.randomUUID();
         String randomUUIDString = uuid.toString();
