@@ -1,7 +1,7 @@
 # Fortumo Sample Spring Boot Application
-The sample Spring Boot application will do numerical calculation (session based) from Spring MVC controller using POST method using request parameter called number.
+The sample Spring Boot application will do numerical plus calculation (session based) from Spring MVC controller using POST method using request parameter called number.
 The same parameter when the value is end will get the sum of of number for the same session.
-The application also use Tomcat 9.x embedded web server.
+The application also use **Apache Tomcat 9.x** embedded web server, **Java 11** and **Gradle** as the build tool.
 
 ## Stucture
 The project is using Gradle as the build system and with the follow folder structure
@@ -15,7 +15,7 @@ It has the following main code structure :-
 * chc.fortumo.MainApplicationConfig (Spring Configution)
 * chc.fortumo.interceptor.CounterInterceptor (Handler Interceptor Adapter to keep CounterSessionData in session)
 * chc.fortumo.controller.CounterSessionData (Session object to keep track of total)
-* chc.fortumo.controller.ProcessController (Controller that computer the number)
+* chc.fortumo.controller.ProcessController (Controller that plus the number)
 * chc.fortumo.controller.HomeController (Root/home controller that return current timestamp, use for health check as well)
 
 ## Building
